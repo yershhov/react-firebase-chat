@@ -6,7 +6,7 @@ interface AppContainerState {
 }
 
 const initialState: AppContainerState = {
-  sideBarIsOpen: true,
+  sideBarIsOpen: false,
 };
 
 export const appContainerSlice = createSlice({
