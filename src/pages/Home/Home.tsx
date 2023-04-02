@@ -20,9 +20,8 @@ const Home = () => {
     const q = query(chatsRef, where("users", "array-contains", user?.uid));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        setChats([...chats, doc.data()]);
-      });
+      const newChats = querySnapshot.docs.map((doc) => doc.data());
+      setChats(newChats);
     });
 
     return () => {
