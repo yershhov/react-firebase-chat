@@ -15,7 +15,7 @@ const SideBar = () => {
         animate={{ x: "0" }}
         exit={{ x: "-12rem" }}
         transition={{ ease: "easeInOut", duration: 0.3 }}
-        className="dark:bg-zinc-800 mainDark h-full w-48
+        className="dark:bg-zinc-800 mainDark h-full w-4/6 
     absolute sm:rounded-tl-xl sm:rounded-bl-xl z-40"
       >
         <SignOutButton />

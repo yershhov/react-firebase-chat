@@ -7,7 +7,9 @@ type ReceivedMessageProps = {
 const ReceivedMessage = (props: ReceivedMessageProps) => {
   return (
     <div className="chat chat-start">
-      <div className="chat-bubble">{props.message.text}</div>
+      <div className="chat-bubble dark:bg-lightDark dark:text-gray-200">
+        {props.message.text}
+      </div>
     </div>
   );
 };

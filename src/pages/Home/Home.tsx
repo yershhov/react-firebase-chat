@@ -32,11 +32,11 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <PageContainer>
+      <div>
         {chats.map((chat) => {
           return <ChatCard key={chat.id} chat={chat} />;
         })}
-      </PageContainer>
+      </div>
     </div>
   );
 };

@@ -13,6 +13,8 @@ const ChatMessageInput = () => {
   const messageInputRef = useRef<HTMLInputElement>(null);
 
   const sendMessage = useCallback(async () => {
+    const messageText = messageInputRef.current!.value;
+    messageInputRef.current!.value = "";
     const newMmessageRef = doc(
       collection(firestore, "chats", params.chatId!, "messages").withConverter(
         messageConverter
@@ -22,9 +24,8 @@ const ChatMessageInput = () => {
     await setDoc(newMmessageRef, {
       sentAt: new Date(),
       uid: user?.uid,
-      text: messageInputRef.current?.value,
+      text: messageText,
     });
-    messageInputRef.current!.value = "";
   }, [user]);
 
   useEffect(() => {
@@ -32,25 +33,35 @@ const ChatMessageInput = () => {
   }, []);
 
   return (
-    <div className="absolute bottom-0 w-full flex">
-      <input
-        ref={messageInputRef}
-        type="text"
-        id="message"
-        className="  text-sm rounded-b-lg w-full p-4 dark:bg-mainDark
-        dark:placeholder-gray-400 dark:text-gray-200 focus:outline-none caret-primary caret-w-10"
-        placeholder="Message"
-      />
-      <div
-        className=" bg-mainDark focus:outline-none
-       rounded-br-lg pr-5 flex items-center"
+    <div>
+      <form
+        action="post"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (messageInputRef.current!.value !== "") {
+            sendMessage();
+          }
+        }}
       >
-        <AiOutlineSend
-          size={20}
-          className="text-primary cursor-pointer"
-          onClick={sendMessage}
-        />
-      </div>
+        <div className="w-full flex">
+          <input
+            ref={messageInputRef}
+            type="text"
+            id="message"
+            className="text-sm rounded-bl-lg w-full h-[3.3rem] p-4 dark:bg-mainDark
+          dark:placeholder-zinc-600 dark:text-gray-200 focus:outline-none caret-primary caret-w-10"
+            placeholder="Message"
+            autoComplete="off"
+          />
+          <button
+            type="submit"
+            className=" bg-mainDark focus:outline-none
+            rounded-br-lg pr-5 flex items-center"
+          >
+            <AiOutlineSend size={20} className="text-primary cursor-pointer" />
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

@@ -15,7 +15,7 @@ function App() {
       <AppContainer>
         <Routes>
           <Route path="/" element={user ? <Home /> : <SignIn />} />
-          <Route path="/:chatId" element={<Chat />}></Route>
+          <Route path="/:companionEmail/:chatId" element={<Chat />}></Route>
         </Routes>
       </AppContainer>
     </div>

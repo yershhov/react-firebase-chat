@@ -9,7 +9,7 @@ module.exports = {
         raisinBlack: "#393748",
         mainDark: "#202020",
         deepDark: "#121212",
-        primary: "#C56FFF",
+        primary: "#AF67E0",
         lightDark: "#303030",
       },
       fontFamily: {

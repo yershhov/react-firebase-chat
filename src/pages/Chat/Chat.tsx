@@ -1,25 +1,16 @@
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router-dom";
-import HeaderContainer from "../../components/layouts/HeaderContainer";
 import PageContainer from "../../components/layouts/PageContainer";
 import { auth, firestore } from "../../firebase/config";
 import { Message, messageConverter } from "../../firebase/entities/message";
 import { UserEntity } from "../../firebase/entities/user";
-import {
-  getChat,
-  getCompanion,
-  getMessagesForChat,
-} from "../../firebase/utils";
 import ChatHeader from "./components/ChatHeader";
 import ChatMessageInput from "./components/ChatMessageInput";
 import ReceivedMessage from "./components/messages/ChatReceivedMessage";
 import SentMessage from "./components/messages/ChatSentMessage";
-
-// type ChatProps = {
-//   id: string;
-// };
 
 const Chat = () => {
   const params = useParams();
@@ -41,36 +32,23 @@ const Chat = () => {
       setMessages(messages);
     });
 
-    async function fetchData() {
-      try {
-        const chat = await getChat(user!.uid, params.chatId!);
-        const companion = await getCompanion(user!, chat.users);
-        setCompanion(companion);
-      } catch (error) {
-        // handle error
-      }
-    }
-    fetchData();
-
     return () => {
       unsubscribe();
     };
   }, [user, params.chatId]);
 
   return (
-    <div>
+    <div className="h-full">
       <ChatHeader companion={companion!} />
-      <PageContainer>
-        <div>
-          {messages.map((message, index) => {
-            return message.uid === user?.uid ? (
-              <SentMessage key={"mesage-" + index} message={message} />
-            ) : (
-              <ReceivedMessage key={"mesage-" + index} message={message} />
-            );
-          })}
-        </div>
-      </PageContainer>
+      <div className="h-[calc(100%-7.7rem)] max-h-[calc(100%-7.7rem)] overflow-y-auto">
+        {messages.map((message, index) => {
+          return message.uid === user?.uid ? (
+            <SentMessage key={"mesage-" + index} message={message} />
+          ) : (
+            <ReceivedMessage key={"mesage-" + index} message={message} />
+          );
+        })}
+      </div>
       <ChatMessageInput />
     </div>
   );

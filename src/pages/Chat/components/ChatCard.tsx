@@ -24,7 +24,7 @@ const ChatCard = (props: ChatCardProps) => {
   }, []);
 
   return (
-    <Link to={`/${props.chat.id}`}>
+    <Link to={`/${companion?.email}/${props.chat.id}`}>
       <div
         key={props.chat.id}
         className=" border-b dark:border-zinc-700 flex items-center gap-4 px-4 py-3 hover:cursor-pointer hover:backdrop-brightness-150"
