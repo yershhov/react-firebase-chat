@@ -1,10 +1,11 @@
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router-dom";
 import HeaderContainer from "../../components/layouts/HeaderContainer";
 import PageContainer from "../../components/layouts/PageContainer";
-import { auth } from "../../firebase/config";
-import { Message } from "../../firebase/entities/message";
+import { auth, firestore } from "../../firebase/config";
+import { Message, messageConverter } from "../../firebase/entities/message";
 import { UserEntity } from "../../firebase/entities/user";
 import {
   getChat,
@@ -27,10 +28,21 @@ const Chat = () => {
   const [companion, setCompanion] = useState<UserEntity>();
 
   useEffect(() => {
+    const messagesRef = collection(
+      firestore,
+      "chats",
+      params.chatId!,
+      "messages"
+    ).withConverter(messageConverter);
+
+    const q = query(messagesRef, orderBy("sentAt"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const messages = querySnapshot.docs.map((doc) => doc.data());
+      setMessages(messages);
+    });
+
     async function fetchData() {
       try {
-        const messages = await getMessagesForChat(user!.uid, params.chatId!);
-        setMessages(messages);
         const chat = await getChat(user!.uid, params.chatId!);
         const companion = await getCompanion(user!, chat.users);
         setCompanion(companion);
@@ -39,6 +51,10 @@ const Chat = () => {
       }
     }
     fetchData();
+
+    return () => {
+      unsubscribe();
+    };
   }, [user, params.chatId]);
 
   return (
