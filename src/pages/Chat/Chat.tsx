@@ -12,6 +12,7 @@ import {
   getMessagesForChat,
 } from "../../firebase/utils";
 import ChatHeader from "./components/ChatHeader";
+import ChatMessageInput from "./components/ChatMessageInput";
 import ReceivedMessage from "./components/messages/ChatReceivedMessage";
 import SentMessage from "./components/messages/ChatSentMessage";
 
@@ -26,29 +27,35 @@ const Chat = () => {
   const [companion, setCompanion] = useState<UserEntity>();
 
   useEffect(() => {
-    getMessagesForChat(user!.uid, params.chatId!).then((res) =>
-      setMessages(res)
-    );
-    getChat(user!.uid, params.chatId!).then((res) => {
-      getCompanion(user!, res.users).then((res) => setCompanion(res));
-    });
-  }, []);
+    async function fetchData() {
+      try {
+        const messages = await getMessagesForChat(user!.uid, params.chatId!);
+        setMessages(messages);
+        const chat = await getChat(user!.uid, params.chatId!);
+        const companion = await getCompanion(user!, chat.users);
+        setCompanion(companion);
+      } catch (error) {
+        // handle error
+      }
+    }
+    fetchData();
+  }, [user, params.chatId]);
 
   return (
     <div>
       <ChatHeader companion={companion!} />
       <PageContainer>
         <div>
-          {messages.map((message) => {
-            console.log(message);
+          {messages.map((message, index) => {
             return message.uid === user?.uid ? (
-              <SentMessage message={message} />
+              <SentMessage key={"mesage-" + index} message={message} />
             ) : (
-              <ReceivedMessage message={message} />
+              <ReceivedMessage key={"mesage-" + index} message={message} />
             );
           })}
         </div>
       </PageContainer>
+      <ChatMessageInput />
     </div>
   );
 };

@@ -34,7 +34,7 @@ const Home = () => {
       <Header />
       <PageContainer>
         {chats.map((chat) => {
-          return <ChatCard chat={chat} />;
+          return <ChatCard key={chat.id} chat={chat} />;
         })}
       </PageContainer>
     </div>

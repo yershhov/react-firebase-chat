@@ -22,11 +22,11 @@ const Header = () => {
 
           <input
             type="text"
-            id="first_name"
-            className="bg-gray-50 border text-sm rounded-lg w-full px-3 py-2 dark:bg-raisinBlack
-         dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200  dark:focus:ring-primary/50
+            id="search"
+            className="border text-sm rounded-lg w-full px-3 py-2 dark:bg-lightDark
+         dark:border-zinc-700 dark:placeholder-gray-400 dark:text-gray-200  dark:focus:ring-primary/50
           dark:focus:border-primary/50 focus:outline-none h-full"
-            placeholder="John"
+            placeholder="Search"
             required
           />
         </div>

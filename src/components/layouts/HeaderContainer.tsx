@@ -6,10 +6,8 @@ type HeaderContainerProps = {
 
 const HeaderContainer = (props: HeaderContainerProps) => {
   return (
-    <div className="relative">
-      <div className="p-4 absolute w-full bottom-0 left-0 h-[4.4rem] dark:bg-deppDark">
-        {props.children}
-      </div>
+    <div className="p-4 absolute top-0 w-full h-[4.4rem] dark:bg-mainDark rounded-t-xl">
+      {props.children}
     </div>
   );
 };

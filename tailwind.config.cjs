@@ -10,6 +10,7 @@ module.exports = {
         mainDark: "#202020",
         deepDark: "#121212",
         primary: "#C56FFF",
+        lightDark: "#303030",
       },
       fontFamily: {
         poppins: ['"Poppins"', ...defaultTheme.fontFamily.sans],

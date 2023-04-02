@@ -1,6 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Route, Routes } from "react-router-dom";
 import AppContainer from "./components/AppContainer/AppContainer";
+import HeaderContainer from "./components/layouts/HeaderContainer";
 import { auth } from "./firebase/config";
 import Chat from "./pages/Chat/Chat";
 import Home from "./pages/Home/Home";

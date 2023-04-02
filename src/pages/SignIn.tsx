@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from "react";
 import { auth, firestore } from "../firebase/config";
 
 const SignIn = () => {
-  const usersCollectionRef = collection(firestore, "users");
   const authButtonRef = useRef<HTMLButtonElement>(null);
 
   const signInWIthGoogle = () => {
@@ -27,7 +26,7 @@ const SignIn = () => {
         type="button"
         className="text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:outline-none
          focus:ring-primary/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
-         inline-flex items-center dark:focus:ring-primary/55 "
+         inline-flex items-center dark:focus:ring-primary/55"
         onClick={signInWIthGoogle}
       >
         <svg
