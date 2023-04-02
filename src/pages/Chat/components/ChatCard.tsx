@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  getCompanion,
-  getLastMessageForChat,
-} from "../../../utils/firestoreUtils";
+import { getCompanion, getLastMessageForChat } from "../../../firebase/utils";
 import { Message } from "../../../firebase/entities/message";
 import { Chat } from "../../../firebase/entities/chat";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -27,14 +24,14 @@ const ChatCard = (props: ChatCardProps) => {
   }, []);
 
   return (
-    <Link to={`/${companion?.uid}/${props.chat.id}`}>
+    <Link to={`/${props.chat.id}`}>
       <div
         key={props.chat.id}
         className=" border-b dark:border-zinc-700 flex items-center gap-4 px-4 py-3 hover:cursor-pointer hover:backdrop-brightness-150"
       >
         <div className="h-[3.5rem] dark:bg-zinc-700 aspect-square rounded-full"></div>
         <div className="flex flex-col gap-2">
-          <p className="dark:text-gray-200 font-semibold">{companion?.email}</p>
+          <p className="font-semibold">{companion?.email}</p>
           <p className="dark:text-gray-400 text-xs">{lastMessage?.text}</p>
         </div>
       </div>

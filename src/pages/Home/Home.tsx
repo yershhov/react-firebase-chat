@@ -1,10 +1,11 @@
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Header from "../components/Header";
-import { auth, firestore } from "../firebase/config";
-import ChatCard from "./Chat/components/ChatCard";
-import { Chat, chatConverter } from "../firebase/entities/chat";
+import Header from "./Header";
+import { auth, firestore } from "../../firebase/config";
+import ChatCard from "../Chat/components/ChatCard";
+import { Chat, chatConverter } from "../../firebase/entities/chat";
+import PageContainer from "../../components/layouts/PageContainer";
 
 const Home = () => {
   const [user] = useAuthState(auth);
@@ -32,11 +33,11 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div>
+      <PageContainer>
         {chats.map((chat) => {
           return <ChatCard chat={chat} />;
         })}
-      </div>
+      </PageContainer>
     </div>
   );
 };

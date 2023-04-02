@@ -1,9 +1,9 @@
 import { signOut } from "firebase/auth";
 import { motion } from "framer-motion";
-import { auth } from "../firebase/config";
-import { useAppDispatch } from "../store";
-import { toggleSideBar } from "./AppContainer/appContainer.slice";
-import { SignOutButton } from "./SignOutButton";
+import { auth } from "../../firebase/config";
+import { useAppDispatch } from "../../store";
+import { toggleSideBar } from "../AppContainer/appContainer.slice";
+import { SignOutButton } from "../SignOutButton";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();

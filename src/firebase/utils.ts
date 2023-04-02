@@ -7,10 +7,10 @@ import {
   getDocs,
   where,
 } from "firebase/firestore";
-import { firestore } from "../firebase/config";
-import { Chat, chatConverter } from "../firebase/entities/chat";
-import { Message, messageConverter } from "../firebase/entities/message";
-import { UserEntity } from "../firebase/entities/user";
+import { firestore } from "./config";
+import { Chat, chatConverter } from "./entities/chat";
+import { Message, messageConverter } from "./entities/message";
+import { UserEntity } from "./entities/user";
 
 export const getChat = async (uid: string, id: string) => {
   const chatsRef = collection(firestore, "chats").withConverter(chatConverter);
@@ -32,7 +32,9 @@ export const getMessagesForChat = async (uid: string, id: string) => {
     "messages"
   ).withConverter(messageConverter);
 
-  const snapshot = await getDocs(messagesRef);
+  const q = query(messagesRef, orderBy("sentAt"));
+
+  const snapshot = await getDocs(q);
 
   const messagesDocs = snapshot.docs;
 

@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import AppContainer from "./components/AppContainer/AppContainer";
 import { auth } from "./firebase/config";
 import Chat from "./pages/Chat/Chat";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import SignIn from "./pages/SignIn";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <AppContainer>
         <Routes>
           <Route path="/" element={user ? <Home /> : <SignIn />} />
-          <Route path="/:companionId/:chatId" element={<Chat />}></Route>
+          <Route path="/:chatId" element={<Chat />}></Route>
         </Routes>
       </AppContainer>
     </div>
