@@ -6,6 +6,7 @@ import { auth, firestore } from "../../firebase/config";
 import ChatCard from "../Chat/components/ChatCard";
 import { Chat, chatConverter } from "../../firebase/entities/chat";
 import PageContainer from "../../components/layouts/PageContainer";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Home = () => {
   const [user] = useAuthState(auth);
@@ -30,14 +31,21 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <div>
-        {chats.map((chat) => {
-          return <ChatCard key={chat.id} chat={chat} />;
-        })}
-      </div>
-    </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Header />
+        <div>
+          {chats.map((chat) => {
+            return <ChatCard key={chat.id} chat={chat} />;
+          })}
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

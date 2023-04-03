@@ -11,9 +11,10 @@ const SideBar = () => {
   return (
     <>
       <motion.div
-        initial={{ x: "-12rem" }}
+        key={1}
+        initial={{ x: "-100%" }}
         animate={{ x: "0" }}
-        exit={{ x: "-12rem" }}
+        exit={{ x: "-100%" }}
         transition={{ ease: "easeInOut", duration: 0.3 }}
         className="dark:bg-zinc-800 mainDark h-full w-4/6 
     absolute sm:rounded-tl-xl sm:rounded-bl-xl z-40"
@@ -21,6 +22,7 @@ const SideBar = () => {
         <SignOutButton />
       </motion.div>
       <motion.div
+        key={2}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

@@ -1,8 +1,8 @@
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import PageContainer from "../../components/layouts/PageContainer";
 import { auth, firestore } from "../../firebase/config";
 import { Message, messageConverter } from "../../firebase/entities/message";
@@ -15,6 +15,7 @@ import SentMessage from "./components/messages/ChatSentMessage";
 const Chat = () => {
   const params = useParams();
   const [user] = useAuthState(auth);
+  const [isChat, setIsChat] = useState(true);
   const [messages, setMessages] = useState<Message[]>([]);
   const [companion, setCompanion] = useState<UserEntity>();
 
@@ -38,19 +39,27 @@ const Chat = () => {
   }, [user, params.chatId]);
 
   return (
-    <div className="h-full">
-      <ChatHeader companion={companion!} />
-      <div className="h-[calc(100%-7.7rem)] max-h-[calc(100%-7.7rem)] overflow-y-auto">
-        {messages.map((message, index) => {
-          return message.uid === user?.uid ? (
-            <SentMessage key={"mesage-" + index} message={message} />
-          ) : (
-            <ReceivedMessage key={"mesage-" + index} message={message} />
-          );
-        })}
-      </div>
-      <ChatMessageInput />
-    </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ ease: "easeInOut", duration: 0.3 }}
+        className="h-full w-full absolute z-40"
+      >
+        <ChatHeader companion={companion!} />
+        <div className="h-[calc(100%-7.7rem)] max-h-[calc(100%-7.7rem)] overflow-y-auto bg-deepDark">
+          {messages.map((message, index) => {
+            return message.uid === user?.uid ? (
+              <SentMessage key={"mesage-" + index} message={message} />
+            ) : (
+              <ReceivedMessage key={"mesage-" + index} message={message} />
+            );
+          })}
+        </div>
+        <ChatMessageInput />
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
