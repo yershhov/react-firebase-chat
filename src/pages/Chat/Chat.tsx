@@ -1,6 +1,6 @@
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation, useParams } from "react-router-dom";
 import PageContainer from "../../components/layouts/PageContainer";
@@ -18,7 +18,17 @@ const Chat = () => {
   const [isChat, setIsChat] = useState(true);
   const [messages, setMessages] = useState<Message[]>([]);
   const [companion, setCompanion] = useState<UserEntity>();
+  const chatBottomRef = useRef<HTMLDivElement>(null);
 
+  const scrollToBottom = () => {
+    chatBottomRef.current!.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+  useEffect(() => {
+    chatBottomRef.current!.scrollIntoView();
+    // divRef.current!.scrollBy({ top: 1000 });
+  }, [messages]);
   useEffect(() => {
     const messagesRef = collection(
       firestore,
@@ -40,13 +50,7 @@ const Chat = () => {
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ ease: "easeInOut", duration: 0.3 }}
-        className="h-full w-full absolute z-40"
-      >
+      <motion.div className="h-full w-full absolute z-40">
         <ChatHeader companion={companion!} />
         <div className="h-[calc(100%-7.7rem)] max-h-[calc(100%-7.7rem)] overflow-y-auto bg-deepDark">
           {messages.map((message, index) => {
@@ -56,8 +60,13 @@ const Chat = () => {
               <ReceivedMessage key={"mesage-" + index} message={message} />
             );
           })}
+          <div ref={chatBottomRef}></div>
         </div>
-        <ChatMessageInput />
+
+        <ChatMessageInput
+          chatScrollableContainer={chatBottomRef}
+          scrollToBottom={scrollToBottom}
+        />
       </motion.div>
     </AnimatePresence>
   );
