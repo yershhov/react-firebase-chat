@@ -5,8 +5,8 @@ const CircleButton = (props: CircleButtonProps) => {
     <button
       type="button"
       className="dark:bg-transparent dark:hover:bg-neutral-800 focus:outline-none focus:ring-1
-  font-medium rounded-full h-full p-2 text-sm
-   dark:focus:ring-primary/50 dark:border-primary/50 text-gray-400"
+  font-medium rounded-full p-2 text-sm
+   dark:focus:ring-primary/50 dark:border-primary/50"
       onClick={props.onClick}
     >
       {props.icon}

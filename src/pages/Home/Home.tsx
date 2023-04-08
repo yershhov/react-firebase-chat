@@ -32,11 +32,11 @@ const Home = () => {
 
   return (
     <AnimatePresence>
-      <motion.div
+      {location.pathname === '/' && (<motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
       >
         <Header />
         <div>
@@ -44,7 +44,8 @@ const Home = () => {
             return <ChatCard key={chat.id} chat={chat} />;
           })}
         </div>
-      </motion.div>
+      </motion.div>)}
+
     </AnimatePresence>
   );
 };

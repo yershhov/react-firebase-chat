@@ -52,7 +52,7 @@ const Chat = () => {
     <AnimatePresence>
       <motion.div className="h-full w-full absolute z-40">
         <ChatHeader companion={companion!} />
-        <div className="h-[calc(100%-7.7rem)] max-h-[calc(100%-7.7rem)] overflow-y-auto bg-deepDark">
+        <div className="h-[calc(100%-7.1rem)] max-h-[calc(100%-7.1rem)] overflow-y-auto bg-deepDark">
           {messages.map((message, index) => {
             return message.uid === user?.uid ? (
               <SentMessage key={"mesage-" + index} message={message} />
