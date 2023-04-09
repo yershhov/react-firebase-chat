@@ -54,12 +54,12 @@ const Search = () => {
             )
 
         const newChatId = uuidv4()
-        await addDoc(chatsRef, {
+        const createdChat = await addDoc(chatsRef, {
             id: newChatId,
             users: [user!.uid, foundUser.uid]
         })
 
-        return newChatId
+        return createdChat.id
     }
 
     useEffect(() => {
@@ -72,7 +72,7 @@ const Search = () => {
             return chats.docs.map((chat: QueryDocumentSnapshot<Chat>) => {
                 const chatData = chat.data()
                 return {
-                    chatId: chatData.id,
+                    chatId: chat.id,
                     uid: chatData.users.filter(u => u !== user!.uid)[0]
                 }
             })

@@ -14,7 +14,7 @@ const ChatHeader = () => {
       <div className="flex items-center gap-4">
         <HeaderButton
           icon={<IoArrowBackSharp size={19} />}
-          onClick={() => history.back()}
+          onClick={() => navigate('/')}
         />
         <div className="h-[2.4rem] dark:bg-zinc-700 aspect-square rounded-full"></div>
         <p className="font-semibold">{params.companionEmail}</p>

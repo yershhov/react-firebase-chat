@@ -25,18 +25,23 @@ const ChatCard = (props: ChatCardProps) => {
   }, []);
 
   return (
-    <Link to={`/${companion?.email}/${props.chat.id}`}>
-      <div
-        key={props.chat.id}
-        className=" border-b dark:border-zinc-800 flex items-center gap-4 px-4 py-3 hover:cursor-pointer hover:backdrop-brightness-150"
-      >
-        <div className="h-[3.5rem] dark:bg-zinc-700 aspect-square rounded-full"></div>
-        <div className="flex flex-col gap-2">
-          <p className="font-semibold">{companion?.email}</p>
-          <p className="dark:text-gray-400 text-xs">{lastMessage?.text}</p>
-        </div>
-      </div>
-    </Link>
+    <>
+      {lastMessage && (
+        <Link to={`/${companion?.email}/${props.chat.id}`}>
+          <div
+            key={props.chat.id}
+            className=" border-b dark:border-zinc-800 flex items-center gap-4 px-4 py-3 hover:cursor-pointer hover:backdrop-brightness-150"
+          >
+            <div className="h-[3.5rem] dark:bg-zinc-700 aspect-square rounded-full" />
+            <div className="flex flex-col gap-2">
+              <p className="font-semibold">{companion?.email}</p>
+              <p className="dark:text-gray-400 text-xs">{lastMessage?.text}</p>
+            </div>
+          </div>
+        </Link>
+      )
+      }
+    </>
   );
 };
 
