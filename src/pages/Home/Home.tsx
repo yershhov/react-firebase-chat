@@ -37,12 +37,15 @@ const Home = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
+        className="h-[calc(100%-3.8rem)]"
       >
         <Header />
-        <div>
-          {chats.map((chat) => {
-            return <ChatCard key={chat.id} chat={chat} />;
-          })}
+        <div className="h-full overflow-y-auto">
+          <div>
+            {chats.map((chat) => {
+              return <ChatCard key={chat.id} chat={chat} />;
+            })}
+          </div>
         </div>
       </motion.div>)}
 

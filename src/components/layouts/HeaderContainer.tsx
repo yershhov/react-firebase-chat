@@ -6,7 +6,7 @@ type HeaderContainerProps = {
 
 const HeaderContainer = (props: HeaderContainerProps) => {
   return (
-    <div className="px-4 grid w-full h-[3.8rem] dark:bg-mainDark rounded-t-xl">
+    <div className="px-4 grid w-full h-[3.8rem] dark:bg-mainDark sm:rounded-t-xl">
       {props.children}
     </div>
   );
