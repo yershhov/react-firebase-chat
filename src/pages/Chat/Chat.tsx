@@ -25,10 +25,11 @@ const Chat = () => {
       behavior: "smooth",
     });
   };
+
   useEffect(() => {
     chatBottomRef.current!.scrollIntoView();
-    // divRef.current!.scrollBy({ top: 1000 });
   }, [messages]);
+
   useEffect(() => {
     const messagesRef = collection(
       firestore,
@@ -38,6 +39,7 @@ const Chat = () => {
     ).withConverter(messageConverter);
 
     const q = query(messagesRef, orderBy("sentAt"));
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => doc.data());
       setMessages(messages);
@@ -46,6 +48,7 @@ const Chat = () => {
     return () => {
       unsubscribe();
     };
+
   }, [user, params.chatId]);
 
   return (

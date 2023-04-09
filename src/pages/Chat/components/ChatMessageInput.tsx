@@ -63,7 +63,7 @@ const ChatMessageInput = (props: ChatMessageInputProps) => {
             <button
               type="submit"
               className=" bg-mainDark focus:outline-none
-            rounded-br-lg pr-5 flex items-center"
+              rounded-br-lg pr-5 flex items-center"
             >
               <AiOutlineSend
                 size={20}

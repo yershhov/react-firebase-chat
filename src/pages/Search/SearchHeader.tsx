@@ -9,11 +9,12 @@ import { SearchContext } from './Search'
 const SearchHeader = () => {
     const navigate = useNavigate();
     const { search, handleSearchChange } = useContext(SearchContext)
+
     return (
         <HeaderContainer>
             <motion.div className="flex items-center gap-4 h-full">
                 <HeaderButton
-                    icon={<IoArrowBackSharp size={20} />}
+                    icon={<IoArrowBackSharp size={19} />}
                     onClick={() => navigate('/')}
                 />
                 <form
@@ -27,9 +28,9 @@ const SearchHeader = () => {
                         <input
                             type="text"
                             id="message"
-                            className="text-sm w-full h-[3.3rem] p-4 dark:bg-transparent
+                            className="text-sm w-full h-[3.3rem] p-4 pl-1 dark:bg-transparent
                           dark:placeholder-zinc-600 dark:text-gray-200 focus:outline-none caret-primary caret-w-10"
-                            placeholder="Search"
+                            placeholder="Search user by email"
                             autoComplete="off"
                             onChange={(e) => handleSearchChange(e)}
                             value={search}
