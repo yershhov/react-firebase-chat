@@ -7,6 +7,7 @@ import ChatCard from "../Chat/components/ChatCard";
 import { Chat, chatConverter } from "../../firebase/entities/chat";
 import { AnimatePresence, motion } from "framer-motion";
 import { uuidv4 } from '@firebase/util';
+import EmptyFullscreenState from "../../components/common/EmptyFullscreenState";
 
 const Home = () => {
   const [user] = useAuthState(auth);
@@ -42,9 +43,9 @@ const Home = () => {
         <Header />
         <div className="h-full overflow-y-auto">
           <div>
-            {chats.map((chat) => {
+            {chats && chats.length > 0 ? chats.map((chat) => {
               return <ChatCard key={uuidv4()} chat={chat} />;
-            })}
+            }) : <EmptyFullscreenState message={"You don't have any chats yet"} />}
           </div>
         </div>
       </motion.div>)}

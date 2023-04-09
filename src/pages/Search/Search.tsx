@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import React, { ChangeEvent, createContext, useCallback, useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import EmptyFullscreenState from '../../components/common/EmptyFullscreenState';
 import { auth, firestore } from '../../firebase/config';
 import { Chat, chatConverter } from '../../firebase/entities/chat';
 import { messageConverter } from '../../firebase/entities/message';
@@ -94,7 +95,7 @@ const Search = () => {
         if (search !== '') {
             const filtered = allUsers.filter(foundUser => {
                 const userEmail = foundUser.data().email
-                if (userEmail.includes(search)) {
+                if (userEmail.includes(search) && foundUser.data().uid !== user!.uid) {
                     return userEmail
                 }
             })
@@ -107,6 +108,9 @@ const Search = () => {
             <SearchContext.Provider value={{ search, handleSearchChange }}>
                 <SearchHeader />
                 <div className="h-full overflow-y-auto">
+                    {search === '' && searchResults.length === 0 && <div className='text-sm'><EmptyFullscreenState message={`Search a user to chat with by email`} /></div>}
+                    {search !== '' && searchResults.length === 0 && <EmptyFullscreenState message={'No user been found with this email'} />}
+
                     {searchResults.map(foundUser => {
                         const foundUserData = foundUser.data()
                         return (

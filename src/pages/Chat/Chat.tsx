@@ -10,6 +10,7 @@ import ChatMessageInput from "./components/ChatMessageInput";
 import ReceivedMessage from "./components/messages/ChatReceivedMessage";
 import SentMessage from "./components/messages/ChatSentMessage";
 import { uuidv4 } from '@firebase/util';
+import EmptyFullscreenState from "../../components/common/EmptyFullscreenState";
 
 const Chat = () => {
   const params = useParams();
@@ -54,13 +55,13 @@ const Chat = () => {
       <motion.div className="h-full w-full absolute z-40">
         <ChatHeader />
         <div className="h-[calc(100%-7.1rem)] max-h-[calc(100%-7.1rem)] overflow-y-auto bg-deepDark">
-          {messages.map((message, index) => {
+          {messages.length > 0 ? messages.map((message, index) => {
             return message.uid === user?.uid ? (
               <SentMessage key={uuidv4()} message={message} />
             ) : (
               <ReceivedMessage key={uuidv4()} message={message} />
             );
-          })}
+          }) : <EmptyFullscreenState message={"Send a message to start a chat"} />}
           <div ref={chatBottomRef}></div>
         </div>
 
