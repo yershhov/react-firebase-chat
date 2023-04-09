@@ -2,7 +2,7 @@ import React from "react";
 import HeaderContainer from "../../../components/layouts/HeaderContainer";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { UserEntity } from "../../../firebase/entities/user";
-import CircleButton from "../../../components/common/CircleButton";
+import HeaderButton from "../../../components/common/CircleButton";
 import { useNavigate, useParams } from "react-router-dom";
 
 type CharHeaderProps = { companion: UserEntity };
@@ -12,7 +12,7 @@ const ChatHeader = (props: CharHeaderProps) => {
   return (
     <HeaderContainer>
       <div className="flex items-center gap-4">
-        <CircleButton
+        <HeaderButton
           icon={<IoArrowBackSharp size={20} />}
           onClick={() => navigate("/")}
         />
