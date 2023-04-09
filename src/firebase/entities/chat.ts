@@ -5,7 +5,7 @@ export class Chat {
   // array of uids of user present in chat
   id: string;
   users: string[];
-  messages: Message[];
+  messages?: Message[];
 
   constructor(id: string, users: string[], messages: Message[]) {
     this.id = id;
@@ -18,7 +18,7 @@ export const chatConverter = {
     return {
       id: chat.id,
       users: chat.users,
-      messages: chat.messages,
+      // messages: chat.messages,
     };
   },
   fromFirestore: (
@@ -26,6 +26,6 @@ export const chatConverter = {
     options: SnapshotOptions
   ) => {
     const data = snapshot.data(options);
-    return new Chat(data.id, data.users, data.messages);
+    return new Chat(data.id, data.users, data.messages ?? []);
   },
 };

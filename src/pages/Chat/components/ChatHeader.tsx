@@ -6,8 +6,7 @@ import HeaderButton from "../../../components/common/HeaderButton";
 import { useNavigate, useParams } from "react-router-dom";
 import BackHomeButton from "../../../components/common/BackHomeButton";
 
-type CharHeaderProps = { companion: UserEntity };
-const ChatHeader = (props: CharHeaderProps) => {
+const ChatHeader = () => {
   const params = useParams();
   const navigate = useNavigate();
   return (
@@ -15,7 +14,7 @@ const ChatHeader = (props: CharHeaderProps) => {
       <div className="flex items-center gap-4">
         <HeaderButton
           icon={<IoArrowBackSharp size={19} />}
-          onClick={() => navigate('/')}
+          onClick={() => history.back()}
         />
         <div className="h-[2.4rem] dark:bg-zinc-700 aspect-square rounded-full"></div>
         <p className="font-semibold">{params.companionEmail}</p>

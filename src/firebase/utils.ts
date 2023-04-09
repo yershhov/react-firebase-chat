@@ -20,7 +20,7 @@ export const getChat = async (uid: string, id: string) => {
 
   const chatData = snapshot.docs[0].data();
 
-  const chat = new Chat(chatData.id, chatData.users, chatData.messages);
+  const chat = new Chat(chatData.id, chatData.users, chatData.messages!);
 
   return chat;
 };

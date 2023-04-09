@@ -6,9 +6,10 @@ import { Chat } from "../../../firebase/entities/chat";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../firebase/config";
 import { UserEntity } from "../../../firebase/entities/user";
+import { QueryDocumentSnapshot } from "firebase/firestore";
 
 type ChatCardProps = {
-  chat: Chat;
+  chat: QueryDocumentSnapshot<Chat>;
 };
 
 const ChatCard = (props: ChatCardProps) => {
@@ -20,7 +21,7 @@ const ChatCard = (props: ChatCardProps) => {
     getLastMessageForChat(props.chat.id).then((res) => {
       setLastMessage(res);
     });
-    getCompanion(user!, props.chat.users).then((res) => setCompanion(res));
+    getCompanion(user!, props.chat.data().users).then((res) => setCompanion(res));
   }, []);
 
   return (

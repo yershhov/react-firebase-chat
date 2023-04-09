@@ -15,7 +15,7 @@ const SearchHeader = () => {
             <motion.div className="flex items-center gap-4 h-full">
                 <HeaderButton
                     icon={<IoArrowBackSharp size={19} />}
-                    onClick={() => navigate('/')}
+                    onClick={() => history.back()}
                 />
                 <form
                     action="post"

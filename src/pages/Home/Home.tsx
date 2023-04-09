@@ -1,4 +1,4 @@
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, QueryDocumentSnapshot, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Header from "./Header";
@@ -11,7 +11,7 @@ import { uuidv4 } from '@firebase/util';
 const Home = () => {
   const [user] = useAuthState(auth);
 
-  const [chats, setChats] = useState<Chat[]>([]);
+  const [chats, setChats] = useState<QueryDocumentSnapshot<Chat>[]>([]);
 
   useEffect(() => {
     const chatsRef = collection(firestore, "chats").withConverter(
@@ -21,7 +21,7 @@ const Home = () => {
     const q = query(chatsRef, where("users", "array-contains", user?.uid));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const newChats = querySnapshot.docs.map((doc) => doc.data());
+      const newChats = querySnapshot.docs.map((doc) => doc);
       setChats(newChats);
     });
 
