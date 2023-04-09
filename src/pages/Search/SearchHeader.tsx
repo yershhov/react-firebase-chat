@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { IoArrowBackSharp } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import HeaderButton from '../../components/common/HeaderButton'
@@ -9,6 +9,9 @@ import { SearchContext } from './Search'
 const SearchHeader = () => {
     const navigate = useNavigate();
     const { search, handleSearchChange } = useContext(SearchContext)
+    const searchInputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => { searchInputRef.current!.focus() }, [searchInputRef.current])
 
     return (
         <HeaderContainer>
@@ -26,6 +29,7 @@ const SearchHeader = () => {
                 >
                     <div className="w-full flex">
                         <input
+                            ref={searchInputRef}
                             type="text"
                             id="message"
                             className="text-sm w-full h-[3.3rem] p-4 pl-1 dark:bg-transparent

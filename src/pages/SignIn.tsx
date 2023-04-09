@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { collection, doc, setDoc } from "firebase/firestore";
-import React, { useEffect, useRef } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import { useEffect, useRef } from "react";
 import { auth, firestore } from "../firebase/config";
 
 const SignIn = () => {
