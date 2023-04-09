@@ -5,8 +5,8 @@ import Header from "./Header";
 import { auth, firestore } from "../../firebase/config";
 import ChatCard from "../Chat/components/ChatCard";
 import { Chat, chatConverter } from "../../firebase/entities/chat";
-import PageContainer from "../../components/layouts/PageContainer";
 import { AnimatePresence, motion } from "framer-motion";
+import { uuidv4 } from '@firebase/util';
 
 const Home = () => {
   const [user] = useAuthState(auth);
@@ -43,7 +43,7 @@ const Home = () => {
         <div className="h-full overflow-y-auto">
           <div>
             {chats.map((chat) => {
-              return <ChatCard key={chat.id} chat={chat} />;
+              return <ChatCard key={uuidv4()} chat={chat} />;
             })}
           </div>
         </div>

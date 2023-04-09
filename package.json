@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-hook/media-query": "^1.1.1",
     "@reduxjs/toolkit": "^1.9.3",
     "daisyui": "^2.51.5",
     "firebase": "^9.17.2",
