@@ -26,16 +26,17 @@ const Search = () => {
     const handleSearchChange = (e: ChangeEvent) => {
         setSearch((e.target as HTMLInputElement).value)
     }
-    const usersRef = collection(
-        firestore,
-        "users",
-    ).withConverter(userConverter);
 
-    const getAllUsers = async () => {
-        return await getDocs(usersRef);
-    }
+
 
     useEffect(() => {
+        const getAllUsers = async () => {
+            const usersRef = collection(
+                firestore,
+                "users",
+            ).withConverter(userConverter);
+            return await getDocs(usersRef);
+        }
         getAllUsers().then(res => setAllUsers(res.docs))
     }, [])
 
@@ -47,10 +48,10 @@ const Search = () => {
                     return userEmail
                 }
             })
-
             setSearchData(filtered)
         } else setSearchData([])
     }, [search])
+
     return (
         <motion.div className="h-[calc(100%-3.8rem)]">
             <SearchContext.Provider value={{ search, handleSearchChange }}>
@@ -59,7 +60,7 @@ const Search = () => {
                     {searchData.map(user => <Link to={`/${user.data().email}`}>
                         <div
                             key={uuidv4()}
-                            className=" border-b dark:border-zinc-700 flex items-center gap-4 px-4 py-1 hover:cursor-pointer hover:backdrop-brightness-150"
+                            className=" border-b dark:border-zinc-800 flex items-center gap-4 px-4 py-1 hover:cursor-pointer hover:backdrop-brightness-150"
                         >
                             <div className="h-[3rem] dark:bg-zinc-700 aspect-square rounded-full"></div>
                             <div className="flex flex-col gap-2">

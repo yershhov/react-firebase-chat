@@ -11,6 +11,7 @@ import ChatHeader from "./components/ChatHeader";
 import ChatMessageInput from "./components/ChatMessageInput";
 import ReceivedMessage from "./components/messages/ChatReceivedMessage";
 import SentMessage from "./components/messages/ChatSentMessage";
+import { uuidv4 } from '@firebase/util';
 
 const Chat = () => {
   const params = useParams();
@@ -58,9 +59,9 @@ const Chat = () => {
         <div className="h-[calc(100%-7.1rem)] max-h-[calc(100%-7.1rem)] overflow-y-auto bg-deepDark">
           {messages.map((message, index) => {
             return message.uid === user?.uid ? (
-              <SentMessage key={"mesage-" + index} message={message} />
+              <SentMessage key={uuidv4()} message={message} />
             ) : (
-              <ReceivedMessage key={"mesage-" + index} message={message} />
+              <ReceivedMessage key={uuidv4()} message={message} />
             );
           })}
           <div ref={chatBottomRef}></div>

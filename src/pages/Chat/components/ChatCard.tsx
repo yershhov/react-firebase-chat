@@ -27,7 +27,7 @@ const ChatCard = (props: ChatCardProps) => {
     <Link to={`/${companion?.email}/${props.chat.id}`}>
       <div
         key={props.chat.id}
-        className=" border-b dark:border-zinc-700 flex items-center gap-4 px-4 py-3 hover:cursor-pointer hover:backdrop-brightness-150"
+        className=" border-b dark:border-zinc-800 flex items-center gap-4 px-4 py-3 hover:cursor-pointer hover:backdrop-brightness-150"
       >
         <div className="h-[3.5rem] dark:bg-zinc-700 aspect-square rounded-full"></div>
         <div className="flex flex-col gap-2">
