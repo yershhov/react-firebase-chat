@@ -1,4 +1,4 @@
-import { collection, onSnapshot, query, QueryDocumentSnapshot, where } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, query, QueryDocumentSnapshot, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Header from "./Header";
@@ -8,11 +8,24 @@ import { Chat, chatConverter } from "../../firebase/entities/chat";
 import { AnimatePresence, motion } from "framer-motion";
 import { uuidv4 } from '@firebase/util';
 import EmptyFullscreenState from "../../components/common/EmptyFullscreenState";
+import { messageConverter } from "../../firebase/entities/message";
 
 const Home = () => {
   const [user] = useAuthState(auth);
 
   const [chats, setChats] = useState<QueryDocumentSnapshot<Chat>[]>([]);
+
+  const checkIfChatIsNotEmpty = async (chat: QueryDocumentSnapshot<Chat>) => {
+    const messagesRef = collection(
+      firestore,
+      "chats",
+      chat.id,
+      "messages"
+    ).withConverter(messageConverter);
+
+    const messages = await getDocs(messagesRef)
+    return messages.docs.length > 0
+  }
 
   useEffect(() => {
     const chatsRef = collection(firestore, "chats").withConverter(
@@ -46,6 +59,7 @@ const Home = () => {
             {chats.length > 0 ? chats.map((chat) => {
               return <ChatCard key={uuidv4()} chat={chat} />;
             }) : <EmptyFullscreenState message={"You don't have any chats yet"} />}
+
           </div>
         </div>
       </motion.div>)}

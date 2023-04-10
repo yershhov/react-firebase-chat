@@ -20,7 +20,7 @@ const Header = () => {
               dispatch(toggleSideBar());
             }}
           />
-          <h2 className="font-semibold text-base">🔥Demoname</h2>
+          <h2 className="font-semibold text-base">"the chat app"</h2>
         </div>
         <div>
           <Link to={"/search"}>
