@@ -20,11 +20,11 @@ const SignIn = () => {
   }, []);
 
   return (
-    <div className=" h-full">
-      <div className=" h-full text-center flex flex-col px-[8rem] sm:px-7 gap-24">
-        <div className="grid gap-7 w-full pt-20">
-          <h1 className="text-4xl font-black text-raisinBlack">WELCOME!👋</h1>
-          <div className="font-semibold text-left text-gray-500 text-[12px] leading-[1.1rem] sm:leading-[0.9rem] w-full px-4">
+    <div className="h-full w-[20rem] mx-auto">
+      <div className=" h-full flex flex-col gap-24 sm:gap-6">
+        <div className="grid gap-12 sm:gap-8 w-full pt-[7rem] sm:pt-16">
+          <h1 className="text-[44px] sm:text-4xl font-black text-raisinBlack text-center">WELCOME!👋</h1>
+          <div className="font-semibold text-left text-gray-500 text-[13px] sm:text-[12px] leading-[1.1rem] sm:leading-[0.9rem] w-full px-2 sm:px-11">
             <h3 >😊A couple things to know:</h3>
             <br />
             <p >1. For now the app only supports <br /> authentication with gmail account, <br />other options will be added soon!</p>
@@ -34,7 +34,7 @@ const SignIn = () => {
             <p>3. Feel free to report any bugs, <br /> ask questions, suggest new features,<br />  etc. on <a href="mailto:yershhov@gmail.com" className="inline text-white/50 font-black hover:brightness-90">yershhov@gmail.com</a> <br /> or directly in this app <br /> (find me by the same email)</p>
           </div>
         </div>
-        <div className="w-full px-4">
+        <div className="w-full px-2 sm:px-11 sm:pt-10">
           <button
             ref={authButtonRef}
             type="button"
