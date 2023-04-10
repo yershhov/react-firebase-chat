@@ -108,7 +108,7 @@ const Search = () => {
             <SearchContext.Provider value={{ search, handleSearchChange }}>
                 <SearchHeader />
                 <div className="h-full overflow-y-auto">
-                    {search === '' && searchResults.length === 0 && <div className='text-sm'><EmptyFullscreenState message={`Search a user to chat with by email`} /></div>}
+                    {search === '' && searchResults.length === 0 && <div className='text-sm'><EmptyFullscreenState message={`Start typing to find a user to chat with`} /></div>}
                     {search !== '' && searchResults.length === 0 && <EmptyFullscreenState message={'No user been found with this email'} />}
 
                     {searchResults.map(foundUser => {
