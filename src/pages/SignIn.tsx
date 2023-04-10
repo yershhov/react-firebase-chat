@@ -1,9 +1,10 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useEffect, useRef } from "react";
 import { auth, firestore } from "../firebase/config";
 
 const SignIn = () => {
+
   const authButtonRef = useRef<HTMLButtonElement>(null);
 
   const signInWIthGoogle = () => {
@@ -15,6 +16,37 @@ const SignIn = () => {
       });
     });
   };
+
+  // const signInWIthGoogle = () => {
+
+  //   authButtonRef.current!.disabled = true
+  //   const provider = new GoogleAuthProvider();
+
+  //   signInWithRedirect(auth, provider)
+
+  //   getRedirectResult(auth)
+  //     .then(async (result) => {
+  //       const credential = GoogleAuthProvider.credentialFromResult(result!);
+  //       const token = credential?.accessToken;
+  //       const user = result?.user;
+
+  //       await setDoc(doc(firestore, "users", user!.uid), {
+  //         email: user?.email,
+  //         uid: user?.uid,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       // The email of the user's account used.
+  //       const email = error.customData.email;
+  //       // The AuthCredential type that was used.
+  //       const credential = GoogleAuthProvider.credentialFromError(error);
+  //       // ...
+  //     });;
+  // };
+
   useEffect(() => {
     authButtonRef.current?.focus();
   }, []);
