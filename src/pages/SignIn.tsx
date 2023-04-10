@@ -61,7 +61,7 @@ const SignIn = () => {
             <br />
             <p >1. For now the app only supports <br /> authentication with gmail account, <br />other options will be added soon!</p>
             <br />
-            <p>2. Smooth animations, beautiful <br /> loading states and performance <br /> enchancements to be done <br /> in the nearest future🙉</p>
+            <p>2. Smooth animations, beautiful <br /> loading states, performance <br /> enchancements, profiles, settings, <br />  etc. yet to do in the future🙉</p>
             <br />
             <p>3. Feel free to report any bugs, <br /> ask questions, suggest new features,<br />  etc. on <a href="mailto:yershhov@gmail.com" className="inline text-white/50 font-black hover:brightness-90">yershhov@gmail.com</a> <br /> or directly in this app <br /> (find me by the same email)</p>
           </div>

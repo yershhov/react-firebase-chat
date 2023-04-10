@@ -43,7 +43,7 @@ const Home = () => {
         <Header />
         <div className="h-full overflow-y-auto">
           <div>
-            {chats && chats.length > 0 ? chats.map((chat) => {
+            {chats.length > 0 ? chats.map((chat) => {
               return <ChatCard key={uuidv4()} chat={chat} />;
             }) : <EmptyFullscreenState message={"You don't have any chats yet"} />}
           </div>
